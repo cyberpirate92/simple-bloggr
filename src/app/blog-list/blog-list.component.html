@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <span class="display-1">Blogs</span>
+  </div>
+  <div class="row">
+    <div class="col-xs-1 col-sm-4 mt-3" *ngFor="let post of this.blogPostService.blogPosts$ | async" [routerLink]="['/posts', post.id]">
+      <div class="card blog-post">
+        <div class="card-header">
+          <span class="h3">{{ post.title }}</span>
+        </div>
+        <div class="p-2">
+          {{ post.body }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
