@@ -1,1 +1,8 @@
-<app-blog-list></app-blog-list>
+<nav class="navbar fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/">Bloggr</a>
+    <button class="btn btn-info" [routerLink]="['/posts/create']">New Blog</button>
+</nav>
+<div class="container-fluid">
+    <div class="mt-5">&nbsp;</div>
+    <router-outlet></router-outlet>
+</div>

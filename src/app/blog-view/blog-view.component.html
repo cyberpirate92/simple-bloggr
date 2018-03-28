@@ -1,3 +1,30 @@
-<div>
-  Nothing here 
-</div>
+<ng-container *ngIf="blogPost; else notFoundTemplate">
+  <div class="alert alert-danger" *ngIf="showFailureAlert">
+    Delete operation failed, please try again
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-danger float-right" (click)="deletePost()">Delete Post</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <span class='display-3'>{{blogPost.title}}</span>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col p-5" style="white-space: pre-wrap">
+      {{ blogPost.body }}
+    </div>
+  </div>
+</ng-container>
+<ng-template #notFoundTemplate>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 text-center">
+      <span class="display-1">404</span>
+    </div>
+    <div class="col-xs-12 col-sm-12 text-center text-muted">
+      <span class="display-3">Post Not Found</span>
+    </div>
+  </div>
+</ng-template>

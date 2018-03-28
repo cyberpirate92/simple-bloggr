@@ -11,5 +11,6 @@ export class BlogListComponent implements OnInit {
   constructor(public blogPostService: PostsService) { }
 
   ngOnInit() {
+    this.blogPostService.refresh();
   }
 }

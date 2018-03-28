@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col mx-3">
+    <div class="alert alert-success" *ngIf="showSuccessAlert">
+      Posted successfully
+    </div>
+    <div class="alert alert-danger" *ngIf="showFailureAlert">
+      Failed to post, please try again
+    </div>
+    <form [formGroup]="blogPostForm" (submit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Post Title</label>
+        <input type="text" placeholder="Post title" class="form-control" id="title" formControlName="title">
+      </div>
+      <div class="form-group">
+        <label for="body">Content</label>
+        <textarea class="form-control" formControlName="body" id="body" placeholder="Post content..."></textarea>
+      </div>
+      <button type="submit" class="btn" [ngClass]="blogPostForm.valid ? 'btn-primary' : 'btn-light'" [disabled]="blogPostForm.invalid">Post</button>
+      <button type="reset" class="btn btn-danger">Discard</button>
+    </form>
+  </div>
+</div>

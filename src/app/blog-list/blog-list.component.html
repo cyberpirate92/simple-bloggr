@@ -1,17 +1,30 @@
-<div class="container-fluid">
-  <div class="row">
-    <span class="display-1">Blogs</span>
-  </div>
-  <div class="row">
-    <div class="col-xs-1 col-sm-4 mt-3" *ngFor="let post of this.blogPostService.blogPosts$ | async" [routerLink]="['/posts', post.id]">
-      <div class="card blog-post">
-        <div class="card-header">
-          <span class="h3">{{ post.title }}</span>
+<ng-container *ngIf="(blogPostService.blogPosts$ | async).length > 0; else noPostsTemplate">
+    <ng-container *ngFor="let post of blogPostService.blogPosts$ | async">
+        <div class="row ml-3 block" [routerLink]="['/posts', post.id]">
+            <div class="col-sm-12 mt-3">
+                <span class="h3">{{ post.title }}</span>
+            </div>
+            <div class="col-sm-12 mt-2">
+                {{ post.body | truncate:{length: 25} }}
+            </div>
         </div>
-        <div class="p-2">
-          {{ post.body }}
+    </ng-container>
+    <div class="row mt-4">
+        <div class="col">
+            <button class="btn btn-secondary" (click)="this.blogPostService.loadPreviousPage()">Prev</button>
+            <small class="text-muted text-center ml-3"> Showing {{ this.blogPostService.currentIndex }} - {{ this.blogPostService.currentIndex + this.blogPostService.maxPostsPerPage - 1 }} out of {{ this.blogPostService.totalPosts$ | async }} posts </small>
+            <button class="btn btn-secondary float-right" (click)="this.blogPostService.loadNextPage()">Next</button>
         </div>
-      </div>
     </div>
-  </div>
-</div>
+</ng-container>
+<ng-template #noPostsTemplate>
+    <div class="row text-center">
+        <div class="col-xs-12 col-sm-12">
+            <span class="display-1">No Posts yet</span>
+        </div>
+        <div class="col-xs-12 col-sm-12 text-muted">
+            <span class="display-3">
+                <a [routerLink]="['/posts/create']">Create</a> a post to get started</span>
+        </div>
+    </div>
+</ng-template>
